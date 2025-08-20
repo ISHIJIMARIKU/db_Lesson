@@ -1,5 +1,6 @@
 ALTER TABLE departments MODIFY department_id INT unsigned AUTO_INCREMENT PRIMARY KEY;
 
+Q1
 CREATE TABLE departments(
 department_id int unsigned AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR(20) NOT NULL,
@@ -21,16 +22,16 @@ VALUES
 
 INSERT INTO people (name,email,department_id,age,gender)
 VALUES
-('桐生戦兎','kamenriderbuild@gizumo.jp','2','26','1'),
-('万丈龍我','kamenridercross-z@gizumo.jp','1','23','1'),
-('猿渡一海','kamenridergrease@gizumo.jp','1','29','1'),
-('氷室幻徳','kamenriderrogue@gizumo.jp','3','35','1'),
-('石動美空','mi-tan@gizumo.jp','5','19','2'),
-('井上生真','kamenridergavv@gizumo.jp','1','19','1'),
-('甘根幸果','hapipare@gizumo.jp','4','21','2'),
-('飛電或人','kammenriderzero-one@gizumo.jp','2','22','1'),
-('檀黎斗','kamenridergenmu@gizumo.jp','2','30','1'),
-('酢賀研造','kamenriderbake@gizumo.jp','2','37','1');
+('桐生戦兎','kamenriderbuild@gizumo.jp',2,26,1),
+('万丈龍我','kamenridercross-z@gizumo.jp',1,23,１),
+('猿渡一海','kamenridergrease@gizumo.jp',1,29,1),
+('氷室幻徳','kamenriderrogue@gizumo.jp',3,35,1),
+('石動美空','mi-tan@gizumo.jp',5,19,2),
+('井上生真','kamenridergavv@gizumo.jp',1,19,1),
+('甘根幸果','hapipare@gizumo.jp',4,21,2),
+('飛電或人','kammenriderzero-one@gizumo.jp',2,22,1),
+('檀黎斗','kamenridergenmu@gizumo.jp',2,30,1),
+('酢賀研造','kamenriderbake@gizumo.jp',2,37,1);
 
 INSERT INTO reports (person_id,content)
 VALUES
@@ -47,7 +48,13 @@ VALUES
 
 
 Q4
-UPDATE people SET department_id = '3' WHERE person_id = ;
+UPDATE people SET department_id = 1 WHERE person_id = 1;
+UPDATE people SET department_id = 2 WHERE person_id = 3;
+UPDATE people SET department_id = 3 WHERE person_id = 2;
+UPDATE people SET department_id = 4 WHERE person_id = 4;
+UPDATE people SET department_id = 5 WHERE person_id = 5;
+UPDATE people SET department_id = 5 WHERE person_id = 6;
+
 
 Q5
 select * from people WHERE gender = 1 order by age desc;
@@ -56,25 +63,26 @@ select name,age from people WHERE gender = 1 order by age desc;
 
 Q6
 SELECT
-  `name`, `email`, `age`
+  'name', 'email', 'age'
 FROM
-  `people`
+  'people'
 WHERE
-  `department_id` = 1
+  'department_id' = 1
 ORDER BY
-  `created_at`;
+  'created_at';
 
-ピープルテーブル　名前とメールアドレスと年齢　営業のみ　コンテンツ作成昇順
+ピープルテーブル 名前とメールアドレスと年齢 営業のみ コンテンツ作成昇順
 ＝peopleテーブル内で営業カラムの名前、email、年齢レコードのみ選択しcreated_atの昇順で並べて表示する。
 
 Q7
-❌select name,age from people WHERE age BETWEEN 20 and 29 and gender = 2; 
-❌select name , age from people WHERE age BETWEEN 20 and 29 and gender = 2 or BETWEEN 40 and 49 and gender = 1;
+-- ❌select name,age from people WHERE age BETWEEN 20 and 29 and gender = 2; 
+-- ❌select name , age from people WHERE age BETWEEN 20 and 29 and gender = 2 or BETWEEN 40 and 49 and gender = 1;
+
 select name , age from people 
 WHERE 
-(age BETWEEN 20 and 29 and gender = '2') 
+(age BETWEEN 20 and 29 and gender = 2) 
 or 
-(age BETWEEN 40 and 49 and gender = '1');
+(age BETWEEN 40 and 49 and gender = 1);
 
 Q8
 select name,department_id,age  
@@ -85,22 +93,23 @@ order by age ASC;
 Q9
 select AVG(age) average_age
 from people
-WHERE gender=2
-group by department_id=2;
+WHERE gender= 2
+group by department_id= 2;
 
 Q10
-❌select
-  name,content
-　from
-  people
-　inner join
-  reports
-　on
-  people.person_id=reports.person_id
-　inner join
-  departments
-　on 
- people.department_id = departments.department_id;
+❌
+-- select
+-- name,content
+-- from
+--   people
+-- inner join
+--   reports
+-- on
+--   people.person_id=reports.person_id
+-- inner join
+--   departments
+-- on 
+--   people.department_id = departments.department_id;
 
 ⚪️
 select
@@ -114,7 +123,7 @@ on
 inner join
   departments
 on 
- people.department_id = departments.department_id;
+  people.department_id = departments.department_id;
 
 短縮版
 select
@@ -128,39 +137,51 @@ on
 inner join
   departments AS d
 on 
- p.department_id = d.department_id;
+  p.department_id = d.department_id;
 
- Q11
+Q11
 ⚪️
 select
- people.name,reports.content
+  people.name,reports.content
 from
- people
+  people
 inner join
- reports
+  reports
 on
- people.person_id = reports.person_id;
+  people.person_id = reports.person_id;
 
 ⚪️
 select
- people.name,reports.content
+  people.name,reports.content
 from
- people
+  people
 inner join
- reports
+  reports
 on
- people.person_id = reports.person_id
-WHERE
- reports.content = '';
+  people.person_id = reports.person_id
+
+
+▲
+-- select
+--   people.name,reports.content
+-- from
+--   people
+-- inner join
+--   reports
+-- on
+--   people.person_id = reports.person_id
+-- WHERE
+--   reports.content = '';
+
 
 ⚪️
 select
- people.name,reports.content
+  people.name,reports.content
 from
- people
+  people
 left join
- reports
+  reports
 on
- people.person_id = reports.person_id
- WHERE
- reports.content is NULL;
+  people.person_id = reports.person_id
+WHERE
+  reports.content is NULL;
